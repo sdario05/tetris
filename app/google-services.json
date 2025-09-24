@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082312137109",
+    "project_id": "tetromino-625ec",
+    "storage_bucket": "tetromino-625ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082312137109:android:0a90d31581fb48474bbe9c",
+        "android_client_info": {
+          "package_name": "tetromino.puzzle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJw2Y2VcqSoJpgEejSxzslHv0roDZoxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

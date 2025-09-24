@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_image_result" type="id"/>
+    <item name="id_restart_result" type="id"/>
+    <item name="id_back_result" type="id"/>
+    <item name="RLPlayAreaId" type="id"/>
+</resources>

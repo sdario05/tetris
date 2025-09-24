@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/RLDisplay"
+    android:fitsSystemWindows="true"
+    android:background="@color/backgroundColor"
+    tools:context="tetromino.puzzle.DisplayGameActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/RLtodo"
+        android:layout_above="@+id/LLAdView">
+
+        <RelativeLayout
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/RLContentPlayArea"
+            android:gravity="center"
+            android:background="@drawable/borde_cuadrado">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/LLTexts"
+            android:background="@drawable/borde_celeste"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:gravity="center_horizontal"
+            android:layout_toEndOf="@+id/RLContentPlayArea"
+            android:layout_toRightOf="@+id/RLContentPlayArea"
+            android:layout_above="@+id/LLButtons"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVThighestScore"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/yellow"
+                android:textSize="12sp"
+                android:text="@string/record"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVhighestScore"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/yellow"
+                android:textSize="12sp"
+                android:text="..."/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVTscore"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                android:text="@string/score"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVscore"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+
+                />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVTlines"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                android:text="@string/lines"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVlines"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVTlevel"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                android:text="@string/level"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVlevel"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVTObjective"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                android:text="@string/clock"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/TVObjective"
+                android:background="@drawable/borde_celeste"
+                android:textColor="@color/playAreaColor"
+                android:textSize="12sp"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/pauseButton"
+                android:src="@drawable/pause_button"
+                android:contentDescription="@string/pause"
+                android:onClick="myOnClick"
+                android:tag="@string/pause"/>
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/muteButton"
+                android:src="@drawable/mute_off_button"
+                android:contentDescription="mute"
+                android:onClick="myOnClick"
+                android:tag="MUTE"/>
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/llcontentnext"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="2dp"
+                android:paddingStart="2dp"
+                android:paddingRight="2dp"
+                android:paddingEnd="2dp"
+                android:background="@drawable/borde_celeste"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundColor"
+                    android:textColor="@color/playAreaColor"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:text="@string/next"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/RLNextChip"
+                    android:tag="next"
+                    >
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/RLContentPlayArea"
+            android:gravity="center_vertical"
+            android:id="@+id/LLButtons"
+            android:background="@drawable/borde_celeste">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:id="@+id/leftButton"
+                    android:src="@drawable/left_button"
+                    android:contentDescription="@string/left"
+                    android:onClick="myOnClick"
+                    android:tag="@string/left"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:id="@+id/downButton"
+                    android:src="@drawable/down_button"
+                    android:contentDescription="@string/down"
+                    android:onClick="myOnClick"
+                    android:tag="@string/down"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:id="@+id/rightButton"
+                    android:src="@drawable/right_button"
+                    android:contentDescription="@string/right"
+                    android:onClick="myOnClick"
+                    android:tag="@string/right"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:id="@+id/rotateButton"
+                    android:src="@drawable/rotate_button"
+                    android:contentDescription="@string/rotate"
+                    android:onClick="myOnClick"
+                    android:tag="@string/rotate"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/pauseLayout"
+            android:background="@drawable/borde_celeste"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:text="@string/gamePaused"
+                    android:id="@+id/pauseTag"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/playAreaColor"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:text="@string/saveScore"
+                    android:id="@+id/TVTName"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/playAreaColor"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:paddingTop="2dp"
+                    android:id="@+id/ETName"
+                    android:hint="@string/name"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textColor="@color/playAreaColor"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/inGameTVObjectives"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingEnd="5dp"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/playAreaColor"
+                    android:textStyle="bold"
+                    />
+
+                <Button
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:id="@+id/BTOk"
+                    android:text="@string/saveScore"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:onClick="myOnClick"
+                    android:background="@drawable/pause_layout_buttons"
+                    android:tag="OK"/>
+
+                <Button
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:text="@string/continueGame"
+                    android:id="@+id/continueButton"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/pause_layout_buttons"
+                    android:onClick="myOnClick"
+                    android:tag="CONTINUE"/>
+
+                <Button
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:text="@string/restartGame"
+                    android:id="@+id/restartButton"
+                    android:background="@drawable/pause_layout_buttons"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:onClick="myOnClick"
+                    android:tag="RESTART"/>
+
+                <Button
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:text="@string/exitGame"
+                    android:id="@+id/exitButton"
+                    android:onClick="myOnClick"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/pause_layout_buttons"
+                    android:tag="EXIT"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/LLAdView"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="match_parent"
+            ads:adUnitId="ca-app-pub-5386313981498626/3648357819"
+            ads:adSize="BANNER"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

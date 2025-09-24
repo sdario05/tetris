@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="tetromino.puzzle.InitialScreenActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/LLWhyFBLogin"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
+        android:paddingRight="15dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/borde_celeste"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:id="@+id/LLTVWhyFacebookLogin1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="220dp"
+            android:layout_marginTop="10dp"
+            android:textSize="10sp"
+            android:id="@+id/LLTVWhyFacebookLogin2"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxWidth="220dp"
+            android:textSize="10sp"
+            android:id="@+id/LLTVWhyFacebookLogin3"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="10sp"
+                android:id="@+id/whyBackButton"
+                android:textAllCaps="false"
+                android:background="@drawable/button2"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/goBack"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LLInitialScreen"
+        android:background="@color/yellow"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="366dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/logo2"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/IMLogo"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/facebook_login"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whyFacebookLogin"
+            android:background="@color/transparent"
+            android:textColor="@color/cyan"
+            android:id="@+id/TVWhyFacebookLogin"
+            android:layout_marginTop="10dp"
+            android:textSize="10sp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BTNoFacebookLogin"
+            android:text="@string/noFacebookLogin"
+            android:textSize="12sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:onClick="onClick"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:tag="NOFACEBOOKLOGIN"
+            android:visibility="gone"/>
+
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTNewGame"
+            android:text="@string/newGame"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:background="@drawable/button"
+            android:tag="NEW_GAME"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTMain"
+            android:text="@string/mainGame"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="@drawable/button"
+            android:tag="MAIN_GAME"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTClassic"
+            android:text="@string/classicGame"
+            android:onClick="onClick"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="@drawable/button"
+            android:tag="CLASSIC_GAME"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTChallenge"
+            android:text="@string/challengeGame"
+            android:onClick="onClick"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/button"
+            android:tag="CHALLENGE"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTEasyChallenge"
+            android:text="@string/easyChallenge"
+            android:onClick="onClick"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/button"
+            android:tag="EASY_CHALLENGE"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTHardChallenge"
+            android:text="@string/hardChallenge"
+            android:onClick="onClick"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/button"
+            android:tag="HARD_CHALLENGE"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:id="@+id/BTBestPlayers"
+            android:text="@string/bestPlayers"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:tag="BEST_PLAYERS"
+            android:background="@drawable/button"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/fbExit"
+        android:background="@drawable/bt_fb_exit_en"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

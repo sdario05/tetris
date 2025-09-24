@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/backgroundColor"
+    tools:context="tetromino.puzzle.HighScoresActivity">
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@color/backgroundColor"
+        android:id="@+id/LLHeader">
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:src="@drawable/logo_transparente"
+            android:id="@+id/IMHighScoresLogo"/>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:text="RANKING"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/playAreaColor"
+            android:id="@+id/TVHighScoresTitle"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/playAreaColor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundColor"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#"
+                android:textStyle="bold"
+                android:textColor="@color/playAreaColor"
+                android:id="@+id/highScoresPosition"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textStyle="bold"
+                android:textColor="@color/playAreaColor"
+                android:id="@+id/highScoresName"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score"
+                android:textColor="@color/playAreaColor"
+                android:textStyle="bold"
+                android:id="@+id/highScoresScore"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:fadeScrollbars="false"
+        android:id="@+id/scrollView">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundColor"
+            android:id="@+id/RLScores">
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
