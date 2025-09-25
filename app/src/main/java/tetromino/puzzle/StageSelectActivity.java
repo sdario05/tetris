@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -36,6 +37,25 @@ public class StageSelectActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_select);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(llObjectives.getVisibility()==View.VISIBLE){
+                    llObjectives.setVisibility(View.GONE);
+                    for(int i=0; i<rowsLayout.getChildCount(); i++){
+                        rowsLayout.getChildAt(i).setAlpha(1);
+                        llTitleTV.setAlpha(1);
+                    }
+                    for(int i=0; i<affectedButtons.size(); i++){
+                        affectedButtons.get(i).setEnabled(true);
+                    }
+                }else{
+                    finish();
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         affectedButtons = new ArrayList<>();
         Display display = getWindowManager().getDefaultDisplay();
@@ -319,23 +339,5 @@ public class StageSelectActivity extends AppCompatActivity implements View.OnCli
         tvObjectives.setText(objective);
         llObjectives.setVisibility(View.VISIBLE);
         llObjectives.bringToFront();
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(llObjectives.getVisibility()==View.VISIBLE){
-            llObjectives.setVisibility(View.GONE);
-            for(int i=0; i<rowsLayout.getChildCount(); i++){
-                rowsLayout.getChildAt(i).setAlpha(1);
-                llTitleTV.setAlpha(1);
-            }
-            for(int i=0; i<affectedButtons.size(); i++){
-                affectedButtons.get(i).setEnabled(true);
-            }
-        }else{
-            finish();
-        }
     }
 }

@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -55,11 +56,57 @@ public class InitialScreenActivity extends AppCompatActivity {
     private TextView llTVWhyFacebookLogin1, llTVWhyFacebookLogin2, llTVWhyFacebookLogin3;
     private LinearLayout llWhyFacebookLogin;
     private FirebaseAnalytics firebaseAnalytics;
+    private boolean isFacebookLoginDialogVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial_screen);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (isFacebookLoginDialogVisible) {
+                    isFacebookLoginDialogVisible = false;
+                    llWhyFacebookLogin.setVisibility(View.GONE);
+                    content.setAlpha(1);
+                } else {
+                    if(newGame.getVisibility()==View.VISIBLE || loginFacebook.getVisibility()==View.VISIBLE){
+                        AlertDialog.Builder dialogBox = new AlertDialog.Builder(InitialScreenActivity.this);
+                        dialogBox.setTitle("Tetromino puzzle");
+                        dialogBox.setMessage(InitialScreenActivity.this.getResources().getString(R.string.wannaClose));
+                        dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        dialogBox.setNegativeButton(InitialScreenActivity.this.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        AlertDialog dialogOk = dialogBox.create();
+                        dialogOk.show();
+                    }else if(classic.getVisibility()==View.VISIBLE){
+                        main.setVisibility(View.GONE);
+                        classic.setVisibility(View.GONE);
+                        challenge.setVisibility(View.GONE);
+                        newGame.setVisibility(View.VISIBLE);
+                        bestPlayers.setVisibility(View.VISIBLE);
+                    }else if(easy.getVisibility()==View.VISIBLE){
+                        easy.setVisibility(View.GONE);
+                        hard.setVisibility(View.GONE);
+                        main.setVisibility(View.VISIBLE);
+                        classic.setVisibility(View.VISIBLE);
+                        challenge.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        };
+
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         /*MobileAds.initialize(this, initializationStatus -> {});
         RequestConfiguration configuration = new RequestConfiguration.Builder()
@@ -129,6 +176,7 @@ public class InitialScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 llWhyFacebookLogin.setVisibility(View.GONE);
                 content.setAlpha(1);
+                isFacebookLoginDialogVisible = false;
             }
         });
 
@@ -148,6 +196,7 @@ public class InitialScreenActivity extends AppCompatActivity {
                 llTVWhyFacebookLogin3.setText(R.string.whyFBLoginLine2);
                 llWhyFacebookLogin.bringToFront();
                 llWhyFacebookLogin.setVisibility(View.VISIBLE);
+                isFacebookLoginDialogVisible = true;
             }
         });
         noFacebookLogin = (Button)findViewById(R.id.BTNoFacebookLogin);
@@ -389,41 +438,5 @@ public class InitialScreenActivity extends AppCompatActivity {
             bestPlayers.setVisibility(View.VISIBLE);
         }
         super.onResume();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(newGame.getVisibility()==View.VISIBLE || loginFacebook.getVisibility()==View.VISIBLE){
-            AlertDialog.Builder dialogBox = new AlertDialog.Builder(InitialScreenActivity.this);
-            dialogBox.setTitle("BRICKS");
-            dialogBox.setMessage(InitialScreenActivity.this.getResources().getString(R.string.wannaClose));
-            dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Process.killProcess(Process.myPid());
-                }
-            });
-            dialogBox.setNegativeButton(InitialScreenActivity.this.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            AlertDialog dialogOk = dialogBox.create();
-            dialogOk.show();
-        }else if(classic.getVisibility()==View.VISIBLE){
-            main.setVisibility(View.GONE);
-            classic.setVisibility(View.GONE);
-            challenge.setVisibility(View.GONE);
-            newGame.setVisibility(View.VISIBLE);
-            bestPlayers.setVisibility(View.VISIBLE);
-        }else if(easy.getVisibility()==View.VISIBLE){
-            easy.setVisibility(View.GONE);
-            hard.setVisibility(View.GONE);
-            main.setVisibility(View.VISIBLE);
-            classic.setVisibility(View.VISIBLE);
-            challenge.setVisibility(View.VISIBLE);
-        }
     }
 }

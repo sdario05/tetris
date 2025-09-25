@@ -38,6 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,7 +64,7 @@ import java.util.Random;
 import cz.msebera.android.httpclient.Header;
 
 public class DisplayGameActivity extends AppCompatActivity {
-    static int navBarHeight;
+    private static int navBarHeight;
     private static int combo;
     private static int x,y;
     private static TextView tvtObjective;
@@ -259,6 +260,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     };
 
+    private boolean displayingInterstitial;
 
     private static int countGrayBricks(){
         int count=0;
@@ -333,6 +335,22 @@ public class DisplayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_game);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!displayingInterstitial) {
+                    if (gameState != Constants.GAME_OVER) {
+                        pause();
+                    } else {
+                        View view = new View(context);
+                        view.setTag("EXIT");
+                        myOnClick(view);
+                    }
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         navBarHeight=0;
         appVersion = BuildConfig.VERSION_NAME;
@@ -729,67 +747,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         objective = getIntent().getExtras().getString("objective");
         ingameObjectives.setText(objective);
 
-        /*AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(this, getString(R.string.interstitial_id), adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // El anuncio se cargó correctamente
-                        interstitial = interstitialAd;
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Falló la carga
-                        interstitial = null;
-                    }
-                }
-        );*/
-
-        /*AdView adView = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("7B7BBEAA33FED98C6CF09E90E6B28148") // mi cel
-                .addTestDevice("6237E130C04BBE00039E8293458D1B7D") // emu sgs2
-                .addTestDevice("A74DBE195129763EE0C647166F2EBDA5") //custom phone
-                .build();
-
-        if(isOnline()){
-            adView.loadAd(adRequest);
-        }
-
-        interstitialLoaded=false;
-        interstitial = new InterstitialAd(DisplayGameActivity.this);
-        interstitial.setAdUnitId(getString(R.string.interstitial_id));
-        if(isOnline()){
-            interstitial.loadAd(adRequest);
-        }
-        interstitial.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                interstitialLoaded=true;
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                if(modo==Constants.MAIN_GAME){
-                    startActivity(new Intent(context,StageSelectActivity.class));
-                    finish();
-                }else{
-                    finish();
-                }
-            }
-
-            @Override
-            public void onAdClosed() {
-                if(modo==Constants.MAIN_GAME){
-                    startActivity(new Intent(context,StageSelectActivity.class));
-                    finish();
-                }else{
-                    finish();
-                }
-            }
-        });*/
-
         randomNextChip=random.nextInt(7);
         rlnextchip = (RelativeLayout)findViewById(R.id.RLNextChip);
         mute=false;
@@ -805,35 +762,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         affectedViews = new ArrayList<View>();
         deletedRows = new int[]{-1,-1,-1,-1};
         initializeVars();
-
-        /*int borderColor = random.nextInt(6);
-        switch (borderColor){
-            case 0:
-                rlContentPlayArea.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_cuadrado));
-                llButtons.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_celeste));
-                LLTexts.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_celeste));
-                break;
-            case 1:
-                rlContentPlayArea.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_cuadrado_marron));
-                llButtons.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_marron));
-                LLTexts.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_marron));
-                break;
-            case 2:
-                rlContentPlayArea.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_cuadrado_rosa));
-                llButtons.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_rosa));
-                LLTexts.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_rosa));
-                break;
-            case 3:
-                rlContentPlayArea.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_cuadrado_verde));
-                llButtons.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_verde));
-                LLTexts.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_verde));
-                break;
-            case 4:
-                rlContentPlayArea.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_cuadrado_violeta));
-                llButtons.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_violeta));
-                LLTexts.setBackground(ContextCompat.getDrawable(context,R.drawable.borde_violeta));
-                break;
-        }*/
     }
 
     private void loadInterstitial(AdRequest adRequest) {
@@ -877,20 +805,6 @@ public class DisplayGameActivity extends AppCompatActivity {
                 });
     }
 
-    private void showInterstitial() {
-        if (interstitialLoaded && interstitial != null) {
-            interstitial.show(this);
-        } else {
-            // Si no está cargado, seguir sin mostrar
-            if (modo == Constants.MAIN_GAME) {
-                startActivity(new Intent(context, StageSelectActivity.class));
-                finish();
-            } else {
-                finish();
-            }
-        }
-    }
-
     private static void initializeVars(){
 
         activeChip=false;
@@ -911,11 +825,6 @@ public class DisplayGameActivity extends AppCompatActivity {
 
         initializeBoard(modo);
 
-
-
-
-
-
         nextSpeedLines = Constants.INITIAL_NEXT_SPEED_LINES;
         gameState=Constants.RUNNING;
         timerHandler.postDelayed(timerRunnable, timerValue);
@@ -933,8 +842,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         LLTexts.setAlpha(1);
         llButtons.setAlpha(1);
     }
-
-
 
     private static void restartGame() {
 
@@ -955,7 +862,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
         pauseLayout.setVisibility(View.INVISIBLE);
         initializeVars();
-
     }
 
     private static void automaticGoDownChip() {
@@ -1159,19 +1065,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         };
     };
 
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-        if(gameState==Constants.RUNNING){
-            pause();
-        }
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
-    }
-
     public void myOnClick(View v){
         String key = v.getTag().toString();
         if(key.equals("PAUSE") && gameState != Constants.GAME_OVER){
@@ -1180,7 +1073,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         if(key.equals("EXIT")){
             if(modo == Constants.MAIN_GAME){
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("BRICKS");
+                dialogBox.setTitle("Tetromino puzzle");
                 dialogBox.setMessage(context.getResources().getString(R.string.wantToFinishStage));
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -1223,6 +1116,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                         }
                         if(interstitialLoaded){
                             displayInterstitial();
+                            pauseLayout.setVisibility(View.INVISIBLE);
                         }else{
                             context.startActivity(i);
                             ((Activity)context).finish();
@@ -1239,7 +1133,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 dialogOk.show();
             }else{
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("BRICKS");
+                dialogBox.setTitle("Tetromino puzzle");
                 dialogBox.setMessage(context.getResources().getString(R.string.wantToFinishGame));
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -1248,6 +1142,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                         sp.release();
                         if(interstitialLoaded){
                             displayInterstitial();
+                            pauseLayout.setVisibility(View.INVISIBLE);
                         }else{
                             ((Activity)context).finish();
                         }
@@ -1279,7 +1174,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 restartGame();
             }else{
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("BRICKS");
+                dialogBox.setTitle("Tetromino puzzle");
                 if(modo!=Constants.MAIN_GAME) {
                     dialogBox.setMessage(context.getResources().getString(R.string.endGameAndRestart));
                 }else{
@@ -1592,7 +1487,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         int children = RLPlayArea.getChildCount();
         int brick = brickSize;
         for(int i=4; i>0; i--){
-            board[(int) (RLPlayArea.getChildAt(children-i).getX()/brick)][(int) (RLPlayArea.getChildAt(children-i).getY()/brick)]=true;            
+            board[(int) (RLPlayArea.getChildAt(children-i).getX()/brick)][(int) (RLPlayArea.getChildAt(children-i).getY()/brick)]=true;
         }
     }
 
@@ -3631,11 +3526,6 @@ public class DisplayGameActivity extends AppCompatActivity {
                             public void afterTextChanged(Editable s) {}
                         });
                         break;
-
-
-
-
-
                 }
                 break;
         }
@@ -3658,6 +3548,7 @@ public class DisplayGameActivity extends AppCompatActivity {
     }
 
     public void displayInterstitial() {
+        displayingInterstitial = true;
         if (interstitial != null) {
             interstitial.show(this); // 'this' debe ser tu Activity
         } else {

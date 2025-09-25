@@ -45,8 +45,7 @@ public class HighScoresActivity extends AppCompatActivity {
         header.setLayoutParams(params);
         params = new LinearLayout.LayoutParams(displayWidth-displayWidth*25/100,
                                                displayHeight*10/100);
-        params.setMargins(0, displayHeight * 3 / 100, 0, 0);
-        logo.setLayoutParams(params);
+        params.setMargins(0, 1, 0, 0);
         ranking.setLayoutParams(params);
         ranking.setGravity(Gravity.CENTER_HORIZONTAL);
 
@@ -146,11 +145,5 @@ public class HighScoresActivity extends AppCompatActivity {
                 Toast.makeText(HighScoresActivity.this,R.string.serverConnectionError,Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 }

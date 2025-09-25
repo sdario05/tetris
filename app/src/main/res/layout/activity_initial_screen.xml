@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxWidth="200dp"
-            android:textSize="12sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
             android:id="@+id/LLTVWhyFacebookLogin1"/>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:maxWidth="220dp"
             android:layout_marginTop="10dp"
-            android:textSize="10sp"
+            android:textSize="16sp"
             android:id="@+id/LLTVWhyFacebookLogin2"/>
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:maxWidth="220dp"
-            android:textSize="10sp"
+            android:textSize="16sp"
             android:id="@+id/LLTVWhyFacebookLogin3"/>
 
         <LinearLayout
@@ -55,8 +55,8 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:textSize="10sp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:id="@+id/whyBackButton"
                 android:textAllCaps="false"
                 android:background="@drawable/button2"
@@ -98,10 +98,10 @@
             android:layout_height="wrap_content"
             android:text="@string/whyFacebookLogin"
             android:background="@color/transparent"
-            android:textColor="@color/cyan"
+            android:textColor="@color/com_facebook_blue"
             android:id="@+id/TVWhyFacebookLogin"
             android:layout_marginTop="10dp"
-            android:textSize="10sp"
+            android:textSize="16sp"
             android:layout_gravity="center"
             android:visibility="gone"/>
 
@@ -110,9 +110,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/BTNoFacebookLogin"
             android:text="@string/noFacebookLogin"
-            android:textSize="12sp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:textSize="16sp"
+            android:paddingHorizontal="20dp"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:layout_marginTop="30dp"

@@ -18,14 +18,14 @@
         android:id="@+id/LLHeader">
 
         <ImageView
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:src="@drawable/logo_transparente"
+            android:layout_width="366dp"
+            android:layout_height="200dp"
+            android:src="@drawable/img_app_background_black"
             android:id="@+id/IMHighScoresLogo"/>
 
         <TextView
-            android:layout_width="1dp"
-            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="RANKING"
             android:textSize="40sp"
             android:textStyle="bold"
