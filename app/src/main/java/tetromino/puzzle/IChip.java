@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 public class IChip extends Chip{
     public int position = 0;
 
-    public IChip(RelativeLayout layout, boolean[][] board , int x, int y, int brickSize, Context context, boolean next) {
+    public IChip(RelativeLayout layout, boolean[][] board , int x, int y, int brickSize, Context context, boolean next, GameOverListener gameOver) {
         if (next){
             for (int i = 0; i < 4; i++) {
                 new Brick(layout, R.drawable.cyan, x, y+i, brickSize, context);
@@ -32,7 +32,7 @@ public class IChip extends Chip{
                 }else if(!board[x][y]){
                     new Brick(layout, R.drawable.cyan, x, y, brickSize, context);
                 }
-                DisplayGameActivity.gameOver();
+                gameOver.callGameOver();
             }
         }
     }

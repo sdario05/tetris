@@ -11,7 +11,7 @@ public class ISChip extends Chip{
     private final int offset = -1;
     public int position = 0;
 
-    public ISChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next){
+    public ISChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next, GameOverListener gameOver){
         if (next){
             new Brick(layout, R.drawable.green, x+offset, y, brickSize, context);
             new Brick(layout, R.drawable.green, x+1+offset, y, brickSize, context);
@@ -28,7 +28,7 @@ public class ISChip extends Chip{
                     new Brick(layout, R.drawable.green, x+1+offset, y, brickSize, context);
                     new Brick(layout, R.drawable.green, x+2+offset, y, brickSize, context);
                 }
-                DisplayGameActivity.gameOver();
+                gameOver.callGameOver();
             }
         }
 

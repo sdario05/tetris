@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
  */
 public class SquareChip extends Chip {
 
-    public SquareChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next){
+    public SquareChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next, GameOverListener gameOver){
         if(next){
             new Brick(layout, R.drawable.yellow,x,y, brickSize,context);
             new Brick(layout, R.drawable.yellow, x+1, y, brickSize,context);
@@ -26,7 +26,7 @@ public class SquareChip extends Chip {
                     new Brick(layout, R.drawable.yellow, x, y, brickSize,context);
                     new Brick(layout, R.drawable.yellow, x+1, y, brickSize,context);
                 }
-                DisplayGameActivity.gameOver();
+                gameOver.callGameOver();
             }
         }
 

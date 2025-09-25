@@ -11,7 +11,7 @@ public class SChip extends Chip{
     private final int offset = -1;
     public int position = 0;
 
-    public SChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next){
+    public SChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next, GameOverListener gameOver){
         if(next){
             new Brick(layout, R.drawable.pink, x+1+offset, y, brickSize, context);
             new Brick(layout, R.drawable.pink, x+2+offset, y, brickSize, context);
@@ -28,7 +28,7 @@ public class SChip extends Chip{
                     new Brick(layout, R.drawable.pink, x+offset, y, brickSize, context);
                     new Brick(layout, R.drawable.pink, x+1+offset, y, brickSize, context);
                 }
-                DisplayGameActivity.gameOver();
+                gameOver.callGameOver();
             }
         }
 

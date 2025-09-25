@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -64,77 +63,76 @@ import java.util.Random;
 import cz.msebera.android.httpclient.Header;
 
 public class DisplayGameActivity extends AppCompatActivity {
-    private static int navBarHeight;
-    private static int combo;
-    private static int x,y;
-    private static TextView tvtObjective;
-    private static TextView tvObjective;
-    private static TextView ingameObjectives;
-    private static Button resultRestart, resultBack;
-    private static LinearLayout llButtons;
-    private static RelativeLayout rlContentPlayArea;
-    private static ImageView resultImage;
-    private static boolean objectiveCompleted;
-    private static RelativeLayout resultLayout;
-    private static String appVersion;
-    private static int pixelsToGoDown;
-    private static int actualCompleteRow;
-    private static int[] deletedRows;
-    private static List<View> affectedViews;
-    private static View[] views;
-    private static boolean animation = false;
-    private static TextView TVLinesScore;
-    private static int soundIds[] = new int[4];
-    private static SoundPool sp;
-    private static boolean mute;
-    private static RelativeLayout rlnextchip;
-    private static int randomChip,randomNextChip;
-    private static int playAreaBorder;
-    private static int stageSelected;
-    private static String objective;
-    private static int brickSize;
-    private static MediaPlayer player;
-    private static RelativeLayout RLPlayArea;
-    private static LinearLayout LLTexts, pauseLayout;
-    private static Button continueButton, restartButton, exitButton;
-    private static Button okButton;
-    private static TextView pauseTag;
-    private static EditText userNameBox;
-    private static TextView userNameTag;
-    private static ImageView leftButton, rightButton, downButton, rotateButton, pauseButton, muteButton;
-    private static Chip chip;
-    private static final Random random = new Random();
-    private static int gameState = Constants.RUNNING;
-    private static TextView highestScoreTag;
-    private static TextView highestScoreBox;
-    private static TextView scoreTag;
-    private static TextView linesTag;
-    private static TextView levelTag;
-    private static TextView scoreBox;
-    private static TextView linesBox;
-    private static TextView levelBox;
-    private static boolean highestScore = false;
-    private static int score;
-    private static int level;
-    private static int lines;
-    private static int nextSpeedLines = Constants.INITIAL_NEXT_SPEED_LINES;
-    private static int timerValue;
-    private static boolean activeChip;
-    private static boolean[][] board = new boolean[Constants.PLAY_AREA_WIDTH]
+    private int navBarHeight;
+    private int combo;
+    private int x,y;
+    private TextView tvtObjective;
+    private TextView tvObjective;
+    private Button resultRestart, resultBack;
+    private LinearLayout llButtons;
+    private RelativeLayout rlContentPlayArea;
+    private ImageView resultImage;
+    private boolean objectiveCompleted;
+    private RelativeLayout resultLayout;
+    private String appVersion;
+    private int pixelsToGoDown;
+    private int actualCompleteRow;
+    private int[] deletedRows;
+    private List<View> affectedViews;
+    private View[] views;
+    private boolean animation = false;
+    private TextView TVLinesScore;
+    private final int[] soundIds = new int[4];
+    private SoundPool sp;
+    private boolean mute;
+    private RelativeLayout rlnextchip;
+    private int randomNextChip;
+    private int playAreaBorder;
+    private int stageSelected;
+    private String objective;
+    private int brickSize;
+    private MediaPlayer player;
+    private RelativeLayout RLPlayArea;
+    private LinearLayout LLTexts, pauseLayout;
+    private Button continueButton, restartButton, exitButton;
+    private Button okButton;
+    private TextView pauseTag;
+    private EditText userNameBox;
+    private TextView userNameTag;
+    private ImageView leftButton, rightButton, downButton, rotateButton, pauseButton, muteButton;
+    private Chip chip;
+    private final Random random = new Random();
+    private int gameState = Constants.RUNNING;
+    private TextView highestScoreTag;
+    private TextView highestScoreBox;
+    private TextView scoreTag;
+    private TextView linesTag;
+    private TextView levelTag;
+    private TextView scoreBox;
+    private TextView linesBox;
+    private TextView levelBox;
+    private boolean highestScore = false;
+    private int score;
+    private int level;
+    private int lines;
+    private int nextSpeedLines = Constants.INITIAL_NEXT_SPEED_LINES;
+    private int timerValue;
+    private boolean activeChip;
+    private boolean[][] board = new boolean[Constants.PLAY_AREA_WIDTH]
             [Constants.PLAY_AREA_HEIGHT];
 
-    private static Handler handlerClock = new Handler();
-    private static Runnable runnableClock = new Runnable() {
+    private Handler handlerClock = new Handler();
+    private Runnable runnableClock = new Runnable() {
         @Override
         public void run() {
             if(!tvObjective.getText().toString().equals("0") && !objectiveCompleted){
-                tvObjective.setText("" + (Integer.parseInt(tvObjective.getText().toString())-1) );
+                tvObjective.setText(String.valueOf((Integer.parseInt(tvObjective.getText().toString())-1)));
                 handlerClock.postDelayed(runnableClock,1000);
             }
         }
     };
-    private static Handler TVScoreLinesHandler = new Handler();
-    private static Runnable TVScoreLinesRunnable = new Runnable() {
+    private Handler TVScoreLinesHandler = new Handler();
+    private Runnable TVScoreLinesRunnable = new Runnable() {
         @Override
         public void run() {
             TVLinesScore.setY(TVLinesScore.getY() - 5);
@@ -149,8 +147,8 @@ public class DisplayGameActivity extends AppCompatActivity {
     };
 
 
-    private static Handler LineDeleteHandler = new Handler();
-    private static Runnable LineDeleteRunnable = new Runnable() {
+    private Handler LineDeleteHandler = new Handler();
+    private Runnable LineDeleteRunnable = new Runnable() {
         @Override
         public void run() {
             int i=0;
@@ -173,7 +171,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                            stageSelected==16 || stageSelected==23 || stageSelected==24 || stageSelected==28 || stageSelected==30 ||
                            stageSelected==34 || stageSelected==35 || stageSelected==38 || stageSelected==41 || stageSelected==44 ||
                            stageSelected==47 || stageSelected==48 || stageSelected>=50){
-                            tvObjective.setText(""+countGrayBricks());
+                            tvObjective.setText(String.valueOf(countGrayBricks()));
                         }
 
                         goDownUpperRows();
@@ -183,8 +181,8 @@ public class DisplayGameActivity extends AppCompatActivity {
             }
         }
     };
-    private static Handler goDownLinesHandler = new Handler();
-    private static Runnable goDownLinesRunnable = new Runnable() {
+    private Handler goDownLinesHandler = new Handler();
+    private Runnable goDownLinesRunnable = new Runnable() {
         @Override
         public void run() {
             if(!affectedViews.isEmpty()){
@@ -230,13 +228,14 @@ public class DisplayGameActivity extends AppCompatActivity {
             }
         }
     };
-    private static Handler timerHandler = new Handler();
-    private static Runnable timerRunnable = new Runnable() {
+    private Handler timerHandler = new Handler();
+    private Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
             if(!activeChip && !objectiveCompleted){
+
                 activeChip=true;
-                randomChip=randomNextChip;
+                int randomChip = randomNextChip;
                 randomNextChip=random.nextInt(7);
                 rlnextchip.removeAllViews();
                 if((float)x/y>0.625){
@@ -262,7 +261,7 @@ public class DisplayGameActivity extends AppCompatActivity {
 
     private boolean displayingInterstitial;
 
-    private static int countGrayBricks(){
+    private int countGrayBricks(){
         int count=0;
         for(int i=0; i<RLPlayArea.getChildCount(); i++){
             if(RLPlayArea.getChildAt(i).getTag().toString().equals("gray")){
@@ -272,28 +271,63 @@ public class DisplayGameActivity extends AppCompatActivity {
         return count;
     }
 
-    private static void drawChip(int nextChip, RelativeLayout layout, int brickSize, int positionX, int positionY, boolean next){
+    private void drawChip(int nextChip, RelativeLayout layout, int brickSize, int positionX, int positionY, boolean next){
         switch(nextChip){
             case 0: chip = new IChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 1: chip = new LChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 2: chip = new ILChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 3: chip = new SChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 4: chip = new ISChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 5: chip = new SquareChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
             case 6: chip = new TChip(layout, board, positionX,
-                    positionY, brickSize, context, next);
+                    positionY, brickSize, context, next, new GameOverListener() {
+                @Override
+                public void callGameOver() {
+                    gameOver();
+                }
+            });
                 break;
         }
     }
@@ -326,10 +360,10 @@ public class DisplayGameActivity extends AppCompatActivity {
     }
 
     private AdView adView;
-    private static InterstitialAd interstitial;
-    private static boolean interstitialLoaded = false;
-    private static Context context;
-    private static int modo;
+    private  InterstitialAd interstitial;
+    private  boolean interstitialLoaded = false;
+    private  Context context;
+    private  int modo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -582,7 +616,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                     String resp = new String(responseBody);
                     try {
                         JSONArray json = new JSONArray(resp);
-                        highestScoreBox.setText("" + json.getJSONObject(0).getInt("MAX(score)"));
+                        highestScoreBox.setText(String.valueOf(json.getJSONObject(0).getInt("MAX(score)")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -706,7 +740,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         //inicio Layout de pausa
         pauseLayout = (LinearLayout)findViewById(R.id.pauseLayout);
 
-        ingameObjectives = (TextView)findViewById(R.id.inGameTVObjectives);
+        TextView inGameObjectives = (TextView) findViewById(R.id.inGameTVObjectives);
         pauseTag = (TextView)findViewById(R.id.pauseTag);
         userNameTag = (TextView)findViewById(R.id.TVTName);
         userNameBox = (EditText)findViewById(R.id.ETName);
@@ -745,7 +779,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         modo = getIntent().getExtras().getInt("modo");
         stageSelected = getIntent().getExtras().getInt("stageSelected");
         objective = getIntent().getExtras().getString("objective");
-        ingameObjectives.setText(objective);
+        inGameObjectives.setText(objective);
 
         randomNextChip=random.nextInt(7);
         rlnextchip = (RelativeLayout)findViewById(R.id.RLNextChip);
@@ -805,7 +839,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 });
     }
 
-    private static void initializeVars(){
+    private  void initializeVars(){
 
         activeChip=false;
         combo=0;
@@ -843,7 +877,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         llButtons.setAlpha(1);
     }
 
-    private static void restartGame() {
+    private  void restartGame() {
 
         rlContentPlayArea.setAlpha(1f);
         LLTexts.setAlpha(1f);
@@ -864,27 +898,28 @@ public class DisplayGameActivity extends AppCompatActivity {
         initializeVars();
     }
 
-    private static void automaticGoDownChip() {
-
-        int collided = chip.isCollidedFrom(board, RLPlayArea, brickSize);
-        if(collided==Constants.BOTTOM_BORDER || collided==Constants.BOTTOM_LEFT_BORDER ||
-           collided == Constants.BOTTOM_RIGHT_BORDER || collided==Constants.BOTTOM_LEFT_RIGHT_BORDER){
-            fillBoardBoxes();
-            checkCompleteRows();
-            activeChip=false;
-        }else{
-            chip.move("DOWN", RLPlayArea, brickSize,x,y,appVersion);
+    private  void automaticGoDownChip() {
+        if (chip != null) {
+            int collided = chip.isCollidedFrom(board, RLPlayArea, brickSize);
+            if(collided==Constants.BOTTOM_BORDER || collided==Constants.BOTTOM_LEFT_BORDER ||
+                    collided == Constants.BOTTOM_RIGHT_BORDER || collided==Constants.BOTTOM_LEFT_RIGHT_BORDER){
+                fillBoardBoxes();
+                checkCompleteRows();
+                activeChip=false;
+            }else{
+                chip.move("DOWN", RLPlayArea, brickSize,x,y,appVersion);
+            }
         }
     }
 
-    private static void loadArrayViews(){
+    private  void loadArrayViews(){
         views = new  View[RLPlayArea.getChildCount()];
         for(int j=0; j<RLPlayArea.getChildCount(); j++){
             views[j] = RLPlayArea.getChildAt(j);
         }
     }
 
-    private static void checkCompleteRows() {
+    private  void checkCompleteRows() {
         for(int i=0; i<4;i++){
             deletedRows[i]=-1;
         }
@@ -919,18 +954,18 @@ public class DisplayGameActivity extends AppCompatActivity {
             deleteCompleteRow();
             switch(completeRows){
                 case 1: partialScore=100;
-                    TVLinesScore.setText("100");
+                    TVLinesScore.setText(String.valueOf(100));
                     break;
                 case 2: partialScore=400;
-                    TVLinesScore.setText("400");
+                    TVLinesScore.setText(String.valueOf(400));
                     break;
                 case 3: partialScore=900;
-                    TVLinesScore.setText("900");
+                    TVLinesScore.setText(String.valueOf(900));
                     break;
                 case 4: partialScore=1600;
-                    TVLinesScore.setText("1600");
+                    TVLinesScore.setText(String.valueOf(1600));
                     if(stageSelected == 20 || stageSelected == 32){
-                        tvObjective.setText( ""+(Integer.parseInt(tvObjective.getText().toString())+1) );
+                        tvObjective.setText(String.valueOf((Integer.parseInt(tvObjective.getText().toString())+1) ));
                     }
                     break;
             }
@@ -980,7 +1015,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void goDownUpperRows() {
+    private  void goDownUpperRows() {
         int row = deletedRows[actualCompleteRow];
         if(row>0) {
             row--;
@@ -998,7 +1033,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         goDownLinesHandler.postDelayed(goDownLinesRunnable, 1);
     }
 
-    private static void deleteCompleteRow() {
+    private  void deleteCompleteRow() {
         for(int row : deletedRows){
             if(row>=0){
                 for(View view : views){
@@ -1012,7 +1047,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         LineDeleteHandler.postDelayed(LineDeleteRunnable, 1);
     }
 
-    private static void accelerateSpeed() {
+    private  void accelerateSpeed() {
         if(lines>=nextSpeedLines){
             if(timerValue>=200){
                 timerValue-=100;
@@ -1044,7 +1079,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_DOWN:
                     if (mHandler != null) return true;
                     mHandler = new Handler();
-                    mHandler.postDelayed(mAction, 400);
+                    mHandler.postDelayed(mAction, 200);
                     break;
                 case MotionEvent.ACTION_UP:
                     if (mHandler == null) return true;
@@ -1078,46 +1113,13 @@ public class DisplayGameActivity extends AppCompatActivity {
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences prefs;
-                        SharedPreferences.Editor editor;
-                        Intent i;
-                        i = new Intent(context,StageSelectActivity.class);
-                        if(AccessToken.getCurrentAccessToken()==null){
-                            prefs = context.getSharedPreferences("sin_login_user", MODE_PRIVATE);
-                            int lastUnlockedStage = Integer.parseInt(prefs.getString("stage","1"));
-                            if(objectiveCompleted && lastUnlockedStage == stageSelected){
-                                editor = prefs.edit();
-                                int stage = Integer.parseInt(prefs.getString("stage","1"));
-                                stage++;
-                                editor.putString("stage",String.valueOf(stage));
-                                editor.commit();
-                            }
-                        }else{
-                            prefs = context.getSharedPreferences("con_login_user", MODE_PRIVATE);
-                            int lastUnlockedStage = Integer.parseInt(prefs.getString("stage","1"));
-                            if(objectiveCompleted && lastUnlockedStage == stageSelected){
-                                AsyncHttpClient client = new AsyncHttpClient();
-                                client.setMaxRetriesAndTimeout(5,30000);
-                                String fbidToSave = prefs.getString("fbid","0");
-                                client.post("http://bricks.000webhostapp.com/phps/save_level.php?fbid=" + URLEncoder.encode(fbidToSave)
-                                        , new AsyncHttpResponseHandler() {
-                                            @Override
-                                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {}
-
-                                            @Override
-                                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {}
-                                        });
-                                editor = prefs.edit();
-                                int stage = Integer.parseInt(prefs.getString("stage","1"));
-                                stage++;
-                                editor.putString("stage",String.valueOf(stage));
-                                editor.commit();
-                            }
-                        }
                         if(interstitialLoaded){
                             displayInterstitial();
                             pauseLayout.setVisibility(View.INVISIBLE);
+                            resultLayout.setVisibility(View.INVISIBLE);
                         }else{
+                            Intent i;
+                            i = new Intent(context,StageSelectActivity.class);
                             context.startActivity(i);
                             ((Activity)context).finish();
                         }
@@ -1143,6 +1145,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                         if(interstitialLoaded){
                             displayInterstitial();
                             pauseLayout.setVisibility(View.INVISIBLE);
+                            resultLayout.setVisibility(View.INVISIBLE);
                         }else{
                             ((Activity)context).finish();
                         }
@@ -1235,7 +1238,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void saveScore(String name) throws UnsupportedEncodingException {
+    private  void saveScore(String name) throws UnsupportedEncodingException {
 
         String nameToSave = name;
         if(nameToSave.equals("noName")){
@@ -1268,7 +1271,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 });
     }
 
-    private static void arrowPressed(String key){
+    private  void arrowPressed(String key){
 
         switch(chip.isCollidedFrom(board, RLPlayArea, brickSize)){
             case Constants.NO_COLLIDED: chip.move(key, RLPlayArea, brickSize,x,y,appVersion);
@@ -1349,7 +1352,7 @@ public class DisplayGameActivity extends AppCompatActivity {
 
 
 
-    private static void pause() {
+    private  void pause() {
         if(gameState == Constants.RUNNING){
             rlContentPlayArea.setAlpha(.2f);
             LLTexts.setAlpha(.2f);
@@ -1391,7 +1394,9 @@ public class DisplayGameActivity extends AppCompatActivity {
                     stageSelected==46 || stageSelected==49){
                 handlerClock.postDelayed(runnableClock, 1000);
             }
-            activeChip=true;
+            if (chip != null) {
+                activeChip=true;
+            }
             gameState=Constants.RUNNING;
             pauseLayout.setVisibility(View.INVISIBLE);
             if(!mute){
@@ -1400,12 +1405,12 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static boolean isOnline(){
+    private  boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
-    public static void gameOver() {
+    public  void gameOver() {
         rlContentPlayArea.setAlpha(.2f);
         LLTexts.setAlpha(.2f);
         llButtons.setAlpha(.2f);
@@ -1450,6 +1455,41 @@ public class DisplayGameActivity extends AppCompatActivity {
             llButtons.setAlpha(.2f);
             if(objectiveCompleted){
 
+                SharedPreferences prefs;
+                SharedPreferences.Editor editor;
+                if(AccessToken.getCurrentAccessToken()==null){
+                    prefs = context.getSharedPreferences("sin_login_user", MODE_PRIVATE);
+                    int lastUnlockedStage = Integer.parseInt(prefs.getString("stage","1"));
+                    if(objectiveCompleted && lastUnlockedStage == stageSelected){
+                        editor = prefs.edit();
+                        int stage = Integer.parseInt(prefs.getString("stage","1"));
+                        stage++;
+                        editor.putString("stage",String.valueOf(stage));
+                        editor.commit();
+                    }
+                }else{
+                    prefs = context.getSharedPreferences("con_login_user", MODE_PRIVATE);
+                    int lastUnlockedStage = Integer.parseInt(prefs.getString("stage","1"));
+                    if(objectiveCompleted && lastUnlockedStage == stageSelected){
+                        AsyncHttpClient client = new AsyncHttpClient();
+                        client.setMaxRetriesAndTimeout(5,30000);
+                        String fbidToSave = prefs.getString("fbid","0");
+                        client.post("http://bricks.000webhostapp.com/phps/save_level.php?fbid=" + URLEncoder.encode(fbidToSave)
+                                , new AsyncHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {}
+
+                                    @Override
+                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {}
+                                });
+                        editor = prefs.edit();
+                        int stage = Integer.parseInt(prefs.getString("stage","1"));
+                        stage++;
+                        editor.putString("stage",String.valueOf(stage));
+                        editor.commit();
+                    }
+                }
+
                 resultRestart.setText(context.getResources().getString(R.string.repeat));
                 resultBack.setText(context.getResources().getString(R.string.continueGame));
                 sp.play(soundIds[3], 1, 1, 1, 0, 1);
@@ -1483,7 +1523,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void fillBoardBoxes() {
+    private  void fillBoardBoxes() {
         int children = RLPlayArea.getChildCount();
         int brick = brickSize;
         for(int i=4; i>0; i--){
@@ -1491,7 +1531,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void generateFalseBoard(){
+    private  void generateFalseBoard(){
         for(int i=0; i<board.length; i++){
             for(int j=0; j<board[i].length; j++ ){
                 board[i][j]=false;
@@ -1499,7 +1539,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void generateRandomBoard(int emptyRows, int bricks){
+    private  void generateRandomBoard(int emptyRows, int bricks){
         Random random = new Random();
         int color=0;
         for(int i=emptyRows; i<Constants.PLAY_AREA_HEIGHT; i++){
@@ -1549,7 +1589,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private static void initializeBoard(int modo){
+    private  void initializeBoard(int modo){
         objectiveCompleted = false;
         generateFalseBoard();
         switch (modo){
@@ -1832,7 +1872,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                         tvtObjective.setVisibility(View.VISIBLE);
                         tvObjective.setVisibility(View.VISIBLE);
                         tvObjective.setText(""+(3*60));
-                        level=10;
+                        level=9;
                         levelBox.setText(""+level);
                         timerValue = timerValue - ((level-1)*100);
                         handlerClock.postDelayed(runnableClock,1000);
@@ -2088,7 +2128,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                         scoreTag.setVisibility(View.GONE);
                         tvtObjective.setVisibility(View.VISIBLE);
                         tvObjective.setVisibility(View.VISIBLE);
-                        tvObjective.setText(""+(10*60));
+                        tvObjective.setText(String.valueOf(10*60));
                         level=5;
                         levelBox.setText(""+level);
                         timerValue = timerValue - ((level-1)*100);
@@ -3531,22 +3571,6 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private  static void printBoard(){
-        String fila = "";
-        for(int i = 0; i<Constants.PLAY_AREA_HEIGHT; i++){
-            for(int j = 0; j<Constants.PLAY_AREA_WIDTH; j++){
-                if(board[j][i]){
-                    fila = fila+"1";
-                }else{
-                    fila = fila + "0";
-                }
-            }
-            Log.i(""+i," "+fila);
-            fila="";
-        }
-
-    }
-
     public void displayInterstitial() {
         displayingInterstitial = true;
         if (interstitial != null) {
@@ -3562,3 +3586,4 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
     }
 }
+

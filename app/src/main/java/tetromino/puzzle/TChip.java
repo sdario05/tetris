@@ -11,7 +11,7 @@ public class TChip extends Chip {
     private final int offset = -1;
     private int position = 0;
 
-    public TChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next) {
+    public TChip(RelativeLayout layout, boolean[][] board, int x, int y, int brickSize, Context context, boolean next, GameOverListener gameOver) {
         if(next){
             new Brick(layout, R.drawable.red, x + 1 + offset, y, brickSize, context);
             for (int i = 0; i < 3; i++) {
@@ -31,7 +31,7 @@ public class TChip extends Chip {
                         new Brick(layout, R.drawable.red, x + i + offset, y, brickSize, context);
                     }
                 }
-                DisplayGameActivity.gameOver();
+                gameOver.callGameOver();
             }
         }
 
