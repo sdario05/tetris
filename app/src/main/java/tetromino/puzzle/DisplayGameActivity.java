@@ -112,6 +112,7 @@ public class DisplayGameActivity extends AppCompatActivity {
     private TextView linesBox;
     private TextView levelBox;
     private boolean highestScore = false;
+    private String urlCookie = "";
     private int score;
     private int level;
     private int lines;
@@ -608,25 +609,22 @@ public class DisplayGameActivity extends AppCompatActivity {
         highestScoreBox.setLayoutParams(textViewParams2);
         highestScoreBox.setGravity(Gravity.CENTER);
 
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.setTimeout(30000);
-            client.post("http://bricks.000webhostapp.com/phps/get_highest_score.php", new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    String resp = new String(responseBody);
-                    try {
-                        JSONArray json = new JSONArray(resp);
-                        highestScoreBox.setText(String.valueOf(json.getJSONObject(0).getInt("MAX(score)")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+        String url = "https://tetromino.page.gd/get_top_scores.php";
+
+        HttpBrowser.callUrl(this, url, "GET_TOP_SCORES", new HttpResponseListener() {
+            @Override
+            public void getCodeResponse(PhpResponse response) { }
+
+            @Override
+            public void getTopScoresResponse(List<ScoreItem> scoresResponse) {
+                if (scoresResponse != null) {
+                    highestScoreBox.setText(String.valueOf(scoresResponse.get(0).getScore()));
+                } else {
                     highestScoreBox.setText(context.getResources().getString(R.string.couldntget));
                 }
-            });
+            }
+        });
 
 
         scoreTag = (TextView)findViewById(R.id.TVTscore);
@@ -1244,31 +1242,27 @@ public class DisplayGameActivity extends AppCompatActivity {
         if(nameToSave.equals("noName")){
             nameToSave=userNameBox.getText().toString();
         }
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setTimeout(30000);
-        client.post("https://tetromino.page.gd/save_score.php?score=" + URLEncoder.encode(scoreBox.getText().toString(),"UTF-8") +
-                        "&name=" + URLEncoder.encode(nameToSave,"UTF-8"),
-                new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        String respuesta = new String(responseBody);
-                        if (respuesta.equals("CORRECTO")) {
-                            okButton.setVisibility(View.GONE);
-                            userNameTag.setVisibility(View.GONE);
-                            userNameBox.setVisibility(View.GONE);
-                            Toast.makeText(context, context.getResources().getString(R.string.resultSaved), Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, context.getResources().getString(R.string.resultNotSaved), Toast.LENGTH_LONG).show();
-                        }
-                        okButton.setEnabled(true);
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        Toast.makeText(context, context.getResources().getString(R.string.serverConnectionError), Toast.LENGTH_LONG).show();
-                        okButton.setEnabled(true);
-                    }
-                });
+        String url = "https://tetromino.page.gd/save_score.php?score=" + URLEncoder.encode(scoreBox.getText().toString(), "UTF-8") +
+                "&name=" + URLEncoder.encode(nameToSave, "UTF-8");
+
+        HttpBrowser.callUrl(this, url, "SAVE_SCORE", new HttpResponseListener() {
+            @Override
+            public void getCodeResponse(PhpResponse response) {
+                if (response.getResponse().equals("CORRECTO")) {
+                    okButton.setVisibility(View.GONE);
+                    userNameTag.setVisibility(View.GONE);
+                    userNameBox.setVisibility(View.GONE);
+                    Toast.makeText(context, context.getResources().getString(R.string.resultSaved), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, context.getResources().getString(R.string.resultNotSaved), Toast.LENGTH_LONG).show();
+                }
+                okButton.setEnabled(true);
+            }
+
+            @Override
+            public void getTopScoresResponse(List<ScoreItem> scores) { }
+        });
     }
 
     private  void arrowPressed(String key){
@@ -1471,17 +1465,28 @@ public class DisplayGameActivity extends AppCompatActivity {
                     prefs = context.getSharedPreferences("con_login_user", MODE_PRIVATE);
                     int lastUnlockedStage = Integer.parseInt(prefs.getString("stage","1"));
                     if(objectiveCompleted && lastUnlockedStage == stageSelected){
-                        AsyncHttpClient client = new AsyncHttpClient();
-                        client.setMaxRetriesAndTimeout(5,30000);
-                        String fbidToSave = prefs.getString("fbid","0");
-                        client.post("http://bricks.000webhostapp.com/phps/save_level.php?fbid=" + URLEncoder.encode(fbidToSave)
-                                , new AsyncHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {}
 
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {}
-                                });
+                        String fbidToSave = prefs.getString("fbid","0");
+                        String url = "https://tetromino.page.gd/save_level.php?fbid=" + URLEncoder.encode(fbidToSave);
+
+                        HttpBrowser.callUrl(this, url, "SAVE_LEVEL", new HttpResponseListener() {
+                            @Override
+                            public void getCodeResponse(PhpResponse response) {
+                                if (response.getResponse().equals("CORRECTO")) {
+                                    okButton.setVisibility(View.GONE);
+                                    userNameTag.setVisibility(View.GONE);
+                                    userNameBox.setVisibility(View.GONE);
+                                    Toast.makeText(context, context.getResources().getString(R.string.resultSaved), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(context, context.getResources().getString(R.string.resultNotSaved), Toast.LENGTH_LONG).show();
+                                }
+                                okButton.setEnabled(true);
+                            }
+
+                            @Override
+                            public void getTopScoresResponse(List<ScoreItem> scores) { }
+                        });
+
                         editor = prefs.edit();
                         int stage = Integer.parseInt(prefs.getString("stage","1"));
                         stage++;

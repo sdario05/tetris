@@ -41,6 +41,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
@@ -219,6 +220,8 @@ public class InitialScreenActivity extends AppCompatActivity {
                         noFacebookLogin.setVisibility(View.GONE);
                         newGame.setVisibility(View.VISIBLE);
                         bestPlayers.setVisibility(View.VISIBLE);
+                        newGame.setAlpha(1);
+                        newGame.setEnabled(true);
                     }
                 });
                 dialogBox.setNegativeButton(InitialScreenActivity.this.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -262,41 +265,37 @@ public class InitialScreenActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(final JSONObject object, GraphResponse response) {
                         try {
-                            final String id = (String)object.get("id");
-                            final String name = (String)object.get("name");
+                            final String facebookId = (String)object.get("id");
+                            final String facebookName = (String)object.get("name");
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.hello) + " " + object.getString("first_name"),Toast.LENGTH_SHORT).show();
-                            AsyncHttpClient client = new AsyncHttpClient();
-                            client.setTimeout(30000);
-                            client.post("http://bricks.000webhostapp.com/phps/get_profile.php?fbid=" + URLEncoder.encode(id,"UTF-8") +
-                                    "&name=" + URLEncoder.encode(name,"UTF-8"), new AsyncHttpResponseHandler() {
+
+                            String url = "https://tetromino.page.gd/get_profile.php?name=" + URLEncoder.encode(facebookName, "UTF-8") +
+                                    "&fbid=" + URLEncoder.encode(facebookId, "UTF-8");
+
+                            HttpBrowser.callUrl(InitialScreenActivity.this, url, "GET_PROFILE", new HttpResponseListener() {
                                 @Override
-                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                    String response = new String(responseBody);
+                                public void getCodeResponse(PhpResponse response) {
                                     SharedPreferences prefs = getSharedPreferences("con_login_user",MODE_PRIVATE);
                                     SharedPreferences.Editor editor = prefs.edit();
-                                    editor.putString("fbid",id);
-                                    editor.putString("name",name);
-                                    if(response.equals("Se cargo ok")){
+                                    editor.putString("fbid",facebookId);
+                                    editor.putString("name",facebookName);
+                                    if (response.getResponse().equals("NEW_USER")) {
                                         editor.putString("stage","1");
                                         editor.commit();
-                                    }else if(response.equals("Error")){
+                                    } else if (response.getResponse().contains("ERROR")) {
                                         Toast.makeText(getApplicationContext(),R.string.serverError,Toast.LENGTH_LONG).show();
                                         main.setEnabled(false);
-                                    }else{
-                                        try {
-                                            JSONArray json = new JSONArray(response);
-                                            editor.putString("stage",json.getJSONObject(0).getString("level"));
-                                            editor.commit();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
+                                    } else {
+                                        editor.putString("stage",response.getResponse());
+                                        editor.commit();
                                     }
+                                    newGame.setAlpha(1);
+                                    newGame.setEnabled(true);
                                 }
 
                                 @Override
-                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                    Toast.makeText(getApplicationContext(),R.string.serverError,Toast.LENGTH_LONG).show();
-                                    main.setEnabled(false);
+                                public void getTopScoresResponse(List<ScoreItem> scores) {
+
                                 }
                             });
                         } catch (JSONException e) {

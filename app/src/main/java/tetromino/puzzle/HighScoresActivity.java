@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +21,9 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.net.URLEncoder;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -83,38 +87,40 @@ public class HighScoresActivity extends AppCompatActivity {
         scroll.setLayoutParams(params2);
 
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setTimeout(30000);
-        client.post("https://tetromino.page.gd/get_top_scores.php", new AsyncHttpResponseHandler() {
+        String url = "https://tetromino.page.gd/get_top_scores.php";
+
+        HttpBrowser.callUrl(this, url, "GET_TOP_SCORES", new HttpResponseListener() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String response = new String(responseBody);
-                int topMargin = 0;
-                try {
-                    JSONArray json = new JSONArray(response);
+            public void getCodeResponse(PhpResponse response) {
 
-                    for(int i=0; i<json.length(); i++){
+            }
+
+            @Override
+            public void getTopScoresResponse(List<ScoreItem> scoresResponse) {
+                if (scoresResponse != null) {
+                    int topMargin = 0;
+                    for(int i=0; i<scoresResponse.size(); i++) {
                         RelativeLayout.LayoutParams rlpositionparams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                                                                                       ViewGroup.LayoutParams.WRAP_CONTENT);
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
                         RelativeLayout.LayoutParams rlnameparams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                                                                                   ViewGroup.LayoutParams.WRAP_CONTENT);
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
                         RelativeLayout.LayoutParams rlscoreparams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                                                                                    ViewGroup.LayoutParams.WRAP_CONTENT);
-                        RelativeLayout.LayoutParams rllineparams = new RelativeLayout.LayoutParams(displayWidth - displayWidth*10/100,1);
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                        RelativeLayout.LayoutParams rllineparams = new RelativeLayout.LayoutParams(displayWidth - displayWidth * 10 / 100, 1);
 
-                        rlpositionparams.setMargins(positionLeftMargin, topMargin*4,0,0);
-                        rlnameparams.setMargins(nameLeftMargin, topMargin*4, 0, 0);
-                        rlscoreparams.setMargins(scoreLeftMargin, topMargin*4, 0, 0);
+                        rlpositionparams.setMargins(positionLeftMargin, topMargin * 4, 0, 0);
+                        rlnameparams.setMargins(nameLeftMargin, topMargin * 4, 0, 0);
+                        rlscoreparams.setMargins(scoreLeftMargin, topMargin * 4, 0, 0);
 
                         TextView tv = new TextView(HighScoresActivity.this);
-                        tv.setText(""+(i+1));
+                        tv.setText("" + (i + 1));
                         tv.setTextSize(12);
                         tv.setTextColor(ContextCompat.getColor(HighScoresActivity.this, R.color.playAreaColor));
                         tv.setLayoutParams(rlpositionparams);
                         scores.addView(tv);
 
                         tv = new TextView(HighScoresActivity.this);
-                        tv.setText(json.getJSONObject(i).getString("name"));
+                        tv.setText(scoresResponse.get(i).getName());
                         tv.setTextSize(12);
                         tv.setTextColor(ContextCompat.getColor(HighScoresActivity.this, R.color.playAreaColor));
                         tv.setLayoutParams(rlnameparams);
@@ -122,27 +128,22 @@ public class HighScoresActivity extends AppCompatActivity {
 
 
                         tv = new TextView(HighScoresActivity.this);
-                        tv.setText(json.getJSONObject(i).getString("score"));
+                        tv.setText(String.valueOf(scoresResponse.get(i).getScore()));
                         tv.setTextSize(12);
                         tv.setTextColor(ContextCompat.getColor(HighScoresActivity.this, R.color.playAreaColor));
                         tv.setLayoutParams(rlscoreparams);
                         scores.addView(tv);
 
                         TextView line = new TextView(HighScoresActivity.this);
-                        rllineparams.setMargins(displayWidth * 5 / 100, topMargin*4 + displayWidth*7/100,0,0);
+                        rllineparams.setMargins(displayWidth * 5 / 100, topMargin * 4 + displayWidth * 7 / 100, 0, 0);
                         line.setLayoutParams(rllineparams);
                         line.setBackgroundColor(ContextCompat.getColor(HighScoresActivity.this, R.color.playAreaColor));
                         scores.addView(line);
-                        topMargin +=nameAndScoreTopMargin;
+                        topMargin += nameAndScoreTopMargin;
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } else {
+                    Toast.makeText(HighScoresActivity.this,R.string.serverConnectionError,Toast.LENGTH_LONG).show();
                 }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(HighScoresActivity.this,R.string.serverConnectionError,Toast.LENGTH_LONG).show();
             }
         });
     }

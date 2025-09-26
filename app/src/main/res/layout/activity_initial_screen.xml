@@ -134,6 +134,8 @@
             android:gravity="center"
             android:background="@drawable/button"
             android:tag="NEW_GAME"
+            android:alpha="0.6"
+            android:enabled="false"
             android:visibility="gone"/>
 
         <Button

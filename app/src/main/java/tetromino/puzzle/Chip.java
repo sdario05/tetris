@@ -33,25 +33,6 @@ public abstract class Chip {
         boolean leftCollision = false, rightCollision = false, bottomCollision = false;
         int children = layout.getChildCount();
         for(int i=4;i>0;i--){
-                int getx = (int)(layout.getChildAt(children-i).getX()/brickSize);
-                if(getx>=10){
-                    String color = layout.getChildAt(children-i).getTag().toString();
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    client.setTimeout(30000);
-                    client.post("http://bricks.000webhostapp.com/phps/save_error.php" +
-                            "?bricksize="+brickSize+"&getx="+getx+"&x="+"1"+"&y="+"1"+"&color="+color+"&version="+"ultima"+
-                            "&donde="+"iscollidedfrom", new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                        }
-                    });
-                }
                 //si hay colision por abajo
                 if(layout.getChildAt(children-i).getY() ==
                         Constants.PLAY_AREA_HEIGHT*brickSize - brickSize ||
