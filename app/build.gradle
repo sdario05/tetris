@@ -11,8 +11,8 @@ android {
         applicationId "tetromino.puzzle"
         minSdkVersion 23
         targetSdkVersion 36
-        versionCode 3
-        versionName "1.02"
+        versionCode 4
+        versionName "1.03"
     }
 
     compileOptions {
