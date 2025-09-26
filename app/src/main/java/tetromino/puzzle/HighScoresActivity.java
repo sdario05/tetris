@@ -85,7 +85,7 @@ public class HighScoresActivity extends AppCompatActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setTimeout(30000);
-        client.post("http://bricks.000webhostapp.com/phps/get_one_hundred_highest.php", new AsyncHttpResponseHandler() {
+        client.post("https://tetromino.page.gd/get_top_scores.php", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

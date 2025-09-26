@@ -1246,8 +1246,8 @@ public class DisplayGameActivity extends AppCompatActivity {
         }
         AsyncHttpClient client = new AsyncHttpClient();
         client.setTimeout(30000);
-        client.post("http://bricks.000webhostapp.com/phps/save_score_version.php?score=" + URLEncoder.encode(scoreBox.getText().toString(),"UTF-8") +
-                        "&name=" + URLEncoder.encode(nameToSave,"UTF-8") + "&version=" + URLEncoder.encode(appVersion,"UTF-8"),
+        client.post("https://tetromino.page.gd/save_score.php?score=" + URLEncoder.encode(scoreBox.getText().toString(),"UTF-8") +
+                        "&name=" + URLEncoder.encode(nameToSave,"UTF-8"),
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

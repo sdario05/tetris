@@ -52,10 +52,10 @@
     <string name="level15">Stage 15: complete 40 lines in 8 minutes</string>
     <string name="level16">Stage 16: remove all gray bricks. Rows: 10, missing bricks per row: 3</string>
     <string name="level17">Stage 17: complete 75 lines</string>
-    <string name="level18">Stage 18: hang on for 10 minutes starting at speed 5</string>
-    <string name="level19">Stage 19: for every 1 lines or more you complete, you increase the speed by 1, reach speed 13</string>
+    <string name="level18">Stage 18: hold for 10 minutes starting at speed 5</string>
+    <string name="level19">Stage 19: for every line or more you complete with one chip, speed will increase by 1, reach speed 13</string>
     <string name="level20">Stage 20: complete 4 lines with a single chip in 4 opportunities</string>
-    <string name="level21">Stage 21: hang on for 5 minutes starting at speed 6</string>
+    <string name="level21">Stage 21: hold for 5 minutes starting at speed 6</string>
     <string name="level22">Stage 22: reach 20.000 points</string>
     <string name="level23">Stage 23: remove all gray bricks. Rows: 5, missing bricks per row: 4</string>
     <string name="level24">Stage 24: remove all gray bricks. Rows: 10, missing bricks per row: 4</string>
@@ -74,7 +74,7 @@
     <string name="level37">Stage 37: complete 125 lines</string>
     <string name="level38">Stage 38: remove all gray bricks. Rows: 10, missing bricks per row: 6</string>
     <string name="level39">Stage 39: reach 30.000 points</string>
-    <string name="level40">Stage 40: for every 5 lines or more you complete, you increase the speed by 1, reach speed 10</string>
+    <string name="level40">Stage 40: for every 5 lines or more you complete, speed will increase by 1, reach speed 10</string>
     <string name="level41">Stage 41: remove all gray bricks. Rows: 10, missing bricks per row: 7</string>
     <string name="level42">Stage 42: complete 80 lines in 16 minutes</string>
     <string name="level43">Stage 43: reach 35000 points</string>
