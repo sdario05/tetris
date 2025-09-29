@@ -398,7 +398,8 @@ public class DisplayGameActivity extends AppCompatActivity {
 
         RequestConfiguration configuration = new RequestConfiguration.Builder()
                 .setTestDeviceIds(Arrays.asList(
-                        "10FCF45AC499FED384D8CB2AC611A8B9"
+                        "10FCF45AC499FED384D8CB2AC611A8B9",
+                        "4CC95CFCA9868D487077529A79433787"
                 ))
                 .build();
         MobileAds.setRequestConfiguration(configuration);
