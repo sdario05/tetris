@@ -143,6 +143,8 @@ public class InitialScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
                 newGame.setVisibility(View.GONE);
+                newGame.setAlpha(0.6f);
+                newGame.setEnabled(false);
                 bestPlayers.setVisibility(View.GONE);
                 main.setVisibility(View.GONE);
                 main.setEnabled(true);
@@ -328,6 +330,8 @@ public class InitialScreenActivity extends AppCompatActivity {
         }else{
             fbExit.setVisibility(View.VISIBLE);
             newGame.setVisibility(View.VISIBLE);
+            newGame.setAlpha(1);
+            newGame.setEnabled(true);
             bestPlayers.setVisibility(View.VISIBLE);
         }
         invalidateOptionsMenu();

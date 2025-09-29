@@ -80,7 +80,7 @@
             android:layout_width="366dp"
             android:layout_height="200dp"
             android:layout_marginTop="50dp"
-            android:src="@drawable/logo2"
+            android:src="@drawable/logo_home_screen"
             android:layout_gravity="center_horizontal"
             android:id="@+id/IMLogo"/>
 
