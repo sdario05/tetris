@@ -101,7 +101,6 @@
 
     <string name="restartStage">Restart stage?</string>
     <string name="hello">Hi</string>
-    <string name="interstitial_id"> ca-app-pub-2546138435705366/3464336337</string>
     <string name="serverError">Internal error, log out and try again later</string>
     <string name="start">Start</string>
     <string name="left">LEFT</string>

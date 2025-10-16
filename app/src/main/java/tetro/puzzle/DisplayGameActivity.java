@@ -795,7 +795,7 @@ public class DisplayGameActivity extends AppCompatActivity {
 
     private void loadInterstitial(AdRequest adRequest) {
 
-        InterstitialAd.load(this, "ca-app-pub-5386313981498626/8709112801", adRequest,
+        InterstitialAd.load(this, "ca-app-pub-8098590269993452/3342369895", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {

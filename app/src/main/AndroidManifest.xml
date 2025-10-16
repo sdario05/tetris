@@ -19,7 +19,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5386313981498626~5971925362"/>
+            android:value="ca-app-pub-8098590269993452~4679502290"/>
 
         <activity
             android:name="tetro.puzzle.InitialScreenActivity"

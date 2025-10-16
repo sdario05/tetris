@@ -380,7 +380,7 @@
             android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="100dp"
-            ads:adUnitId="ca-app-pub-5386313981498626/3648357819"
+            ads:adUnitId="ca-app-pub-8098590269993452/6591543282"
             ads:adSize="BANNER"
             />
     </LinearLayout>

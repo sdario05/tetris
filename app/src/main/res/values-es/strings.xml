@@ -19,7 +19,6 @@
     <string name="gamePaused">Juego pausado</string>
     <string name="saveScore">Guardar puntaje</string>
     <string name="continueGame">Continuar</string>
-    <string name="interstitial_id"> ca-app-pub-2546138435705366/3464336337</string>
     <string name="restartGame">Reiniciar</string>
     <string name="exitGame">Salir</string>
     <string name="couldntget">No se pudo recuperar</string>
