@@ -1,4 +1,4 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 /**
  * Created by Dario on 26/11/2016.

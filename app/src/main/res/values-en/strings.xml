@@ -3,7 +3,7 @@
     <string name="remainingBricks">Remaining bricks</string>
     <string name="fourLines">4 lines with a single chip</string>
     <string name="clock">Timer</string>
-    <string name="app_name">Tetromino puzzle</string>
+    <string name="app_name">Tetro puzzle</string>
     <string name="score">Score</string>
     <string name="lines">Lines</string>
     <string name="level">Speed</string>
@@ -33,7 +33,7 @@
     <string name="resultNotSaved">Error, try again</string>
     <string name="serverConnectionError">Error connecting to server, check your data connection</string>
     <string name="gameOver">Game Over</string>
-    <string name="wannaClose">Do you want to close Tetromino puzzle?</string>
+    <string name="wannaClose">Do you want to close Tetro puzzle?</string>
 
     <string name="level1">Stage 1: complete 25 lines</string>
     <string name="level2">Stage 2: remove all gray bricks. Rows: 5, missing bricks per row: 1</string>
@@ -112,7 +112,7 @@
     <string name="repeat">Replay stage</string>
     <string name="retry">Retry</string>
     <string name="mainGame">Campaign</string>
-    <string name="facebook_app_id">1772661153614888</string>
+    <string name="facebook_app_id">1783772462274660</string>
     <string name="whyFacebookLogin">Why log in with Facebook?</string>
     <string name="noFacebookLogin">Continue whitout log in with Facebook</string>
     <string name="facebookLoginCancel">Log in with Facebook cancelled</string>
@@ -121,10 +121,10 @@
     <string name="title_activity_initial_screen">InitialScreenActivity</string>
     <string name="title_activity_high_scores">HighScoresActivity</string>
     <string name="whyFBLoginLine1">- It will allow you to automatically save the score obtained in Classic and Challenge
-    modes in a common table to Tetromino puzzle players from around the world. This table can be seen from the button Top Players.</string>
+    modes in a common table to Tetro puzzle players from around the world. This table can be seen from the button Top Players.</string>
     <string name="whyFBLoginLine2">- It will prevent you from losing Campaign mode advances, even if you uninstall and
-    reinstall Tetromino puzzle.</string>
+    reinstall Tetro puzzle.</string>
     <string name="goBack">Go back</string>
-    <string name="continueWithoutFBLogin">Your progress will be lost if you uninstall Tetromino puzzle, continue without
+    <string name="continueWithoutFBLogin">Your progress will be lost if you uninstall Tetro puzzle, continue without
     logging in with Facebook?</string>
 </resources>

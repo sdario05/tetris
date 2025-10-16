@@ -1,4 +1,4 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.os.Process;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -32,10 +31,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,8 +39,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
-
-import cz.msebera.android.httpclient.Header;
 
 public class InitialScreenActivity extends AppCompatActivity {
     private LoginButton loginFacebook;
@@ -74,7 +68,7 @@ public class InitialScreenActivity extends AppCompatActivity {
                 } else {
                     if(newGame.getVisibility()==View.VISIBLE || loginFacebook.getVisibility()==View.VISIBLE){
                         AlertDialog.Builder dialogBox = new AlertDialog.Builder(InitialScreenActivity.this);
-                        dialogBox.setTitle("Tetromino puzzle");
+                        dialogBox.setTitle("Tetro puzzle");
                         dialogBox.setMessage(InitialScreenActivity.this.getResources().getString(R.string.wannaClose));
                         dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -212,7 +206,7 @@ public class InitialScreenActivity extends AppCompatActivity {
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE,bundle);
 
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(InitialScreenActivity.this);
-                dialogBox.setTitle("Tetromino puzzle");
+                dialogBox.setTitle("Tetro puzzle");
                 dialogBox.setMessage(InitialScreenActivity.this.getResources().getString(R.string.continueWithoutFBLogin));
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

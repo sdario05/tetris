@@ -1,4 +1,4 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 public class ScoreItem {
     private String name;

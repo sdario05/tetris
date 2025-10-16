@@ -3,7 +3,7 @@
     <string name="remainingBricks">Ladrillos restantes</string>
     <string name="fourLines">4 líneas con una ficha</string>
     <string name="clock">Reloj</string>
-    <string name="app_name">Tetromino puzzle</string>
+    <string name="app_name">Tetro puzzle</string>
     <string name="score">Puntaje</string>
     <string name="lines">Líneas</string>
     <string name="level">Velocidad</string>
@@ -27,7 +27,7 @@
     <string name="wantToFinishGame">¿Está seguro que desea terminar el juego?</string>
     <string name="wantToFinishStage">¿Está seguro que desea abandonar el escenario?</string>
     <string name="cancel">Cancelar</string>
-    <string name="wannaClose">¿Quieres cerrar Tetromino puzzle?</string>
+    <string name="wannaClose">¿Quieres cerrar Tetro puzzle?</string>
     <string name="endGameAndRestart">¿Finalizar juego y empezar uno nuevo?</string>
     <string name="noName">No ingresó el nombre</string>
     <string name="resultSaved">Resultado guardado correctamente</string>
@@ -110,7 +110,7 @@
     <string name="backToSelectStage">Volver a Selección de escenario</string>
     <string name="retry">Reintentar</string>
     <string name="mainGame">Campaña</string>
-    <string name="facebook_app_id">1772661153614888</string>
+    <string name="facebook_app_id">1783772462274660</string>
     <string name="whyFacebookLogin">¿Para qué iniciar sesión con Facebook?</string>
     <string name="noFacebookLogin">Continuar sin iniciar sesión con Facebook</string>
     <string name="facebookLoginCancel">Se canceló el inicio de sesión con Facebook</string>
@@ -119,11 +119,11 @@
     <string name="title_activity_initial_screen">InitialScreenActivity</string>
     <string name="title_activity_high_scores">HighScoresActivity</string>
     <string name="whyFBLoginLine1">- Te permitirá guardar automáticamente el puntaje obtenido en los modos Clásico
-    y Reto en una tabla general común para los jugadores de Tetromino puzzle de todo el mundo. Esta tabla la puedes ver
+    y Reto en una tabla general común para los jugadores de Tetro puzzle de todo el mundo. Esta tabla la puedes ver
     desde el botón Mejores Jugadores.</string>
     <string name="whyFBLoginLine2">- Evitará que pierdas los avances del modo Campaña, aun si desinstalas y vuelves a
-    instalar Tetromino puzzle.</string>
+    instalar Tetro puzzle.</string>
     <string name="goBack">Volver</string>
-    <string name="continueWithoutFBLogin">Se perderán tus avances si desinstalas Tetromino puzzle, ¿continuar sin iniciar
+    <string name="continueWithoutFBLogin">Se perderán tus avances si desinstalas Tetro puzzle, ¿continuar sin iniciar
     sesión con Facebook?</string>
 </resources>

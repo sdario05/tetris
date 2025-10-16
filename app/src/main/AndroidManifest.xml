@@ -7,7 +7,7 @@
 
     <application
         android:largeHeap="true"
-        android:name="tetromino.puzzle.BricksApp"
+        android:name="tetro.puzzle.BricksApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -15,14 +15,14 @@
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
-            android:value="6cb783e6191845c375830a342af2d308" />
+            android:value="5f905b6042b97fcf3547e14303c13620" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5386313981498626~5971925362"/>
 
         <activity
-            android:name="tetromino.puzzle.InitialScreenActivity"
+            android:name="tetro.puzzle.InitialScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
@@ -33,16 +33,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="tetromino.puzzle.DisplayGameActivity"
+            android:name="tetro.puzzle.DisplayGameActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="tetromino.puzzle.StageSelectActivity"
+            android:name="tetro.puzzle.StageSelectActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
-            android:name="tetromino.puzzle.HighScoresActivity"
+            android:name="tetro.puzzle.HighScoresActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 

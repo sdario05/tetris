@@ -1,4 +1,4 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 import android.content.Context;
 import android.widget.RelativeLayout;

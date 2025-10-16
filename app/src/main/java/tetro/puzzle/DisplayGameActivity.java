@@ -1,4 +1,4 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 import com.facebook.AccessToken;
 import com.google.android.gms.ads.AdRequest;
@@ -49,10 +49,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import org.json.JSONArray;
-import org.json.JSONException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -60,7 +57,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import cz.msebera.android.httpclient.Header;
 
 public class DisplayGameActivity extends AppCompatActivity {
     private int navBarHeight;
@@ -1107,7 +1103,7 @@ public class DisplayGameActivity extends AppCompatActivity {
         if(key.equals("EXIT")){
             if(modo == Constants.MAIN_GAME){
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("Tetromino puzzle");
+                dialogBox.setTitle("Tetro puzzle");
                 dialogBox.setMessage(context.getResources().getString(R.string.wantToFinishStage));
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -1134,7 +1130,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 dialogOk.show();
             }else{
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("Tetromino puzzle");
+                dialogBox.setTitle("Tetro puzzle");
                 dialogBox.setMessage(context.getResources().getString(R.string.wantToFinishGame));
                 dialogBox.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -1176,7 +1172,7 @@ public class DisplayGameActivity extends AppCompatActivity {
                 restartGame();
             }else{
                 AlertDialog.Builder dialogBox = new AlertDialog.Builder(context);
-                dialogBox.setTitle("Tetromino puzzle");
+                dialogBox.setTitle("Tetro puzzle");
                 if(modo!=Constants.MAIN_GAME) {
                     dialogBox.setMessage(context.getResources().getString(R.string.endGameAndRestart));
                 }else{

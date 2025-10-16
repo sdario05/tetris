@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:background="@color/backgroundColor"
-    tools:context="tetromino.puzzle.HighScoresActivity">
+    tools:context="tetro.puzzle.HighScoresActivity">
 
     <LinearLayout
         android:layout_width="1dp"

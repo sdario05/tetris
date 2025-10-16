@@ -8,7 +8,7 @@
     android:id="@+id/RLDisplay"
     android:fitsSystemWindows="true"
     android:background="@color/backgroundColor"
-    tools:context="tetromino.puzzle.DisplayGameActivity">
+    tools:context="tetro.puzzle.DisplayGameActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

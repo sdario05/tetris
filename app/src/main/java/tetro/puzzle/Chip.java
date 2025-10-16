@@ -1,12 +1,7 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Dario on 26/11/2016.

@@ -1,10 +1,9 @@
-package tetromino.puzzle;
+package tetro.puzzle;
 
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,16 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.net.URLEncoder;
 import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
 
 public class HighScoresActivity extends AppCompatActivity {
 
